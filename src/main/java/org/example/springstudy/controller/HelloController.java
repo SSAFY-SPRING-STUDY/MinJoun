@@ -8,15 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
 
-    @Autowired
     private final HelloService helloService;
 
     public HelloController(HelloService helloService) {
         this.helloService = helloService;
     }
 
-    @GetMapping("hello")
-    public String Hello () {
+    @GetMapping("/hello")
+    public String hello() {
         return helloService.hi();
     }
 }
