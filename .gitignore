@@ -23,6 +23,11 @@ out/
 bin/
 !gradle/wrapper/gradle-wrapper.jar
 
+**/buildOutputCleanup/
+**/executionHistory/
+**/fileHashes/
+**/tmp/
+
 # Build artifacts
 *.class
 *.jar
@@ -38,6 +43,8 @@ target/
 # Logs
 # ===============================
 *.log
+*.lock
+*.bin
 
 # ===============================
 # Environment / Secrets
