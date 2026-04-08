@@ -19,7 +19,7 @@ public class PostController {
 
     // 게시글 생성
     // 201 : PostResponse
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<PostResponse> createPost(@RequestBody PostRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(postService.save(request));
@@ -27,7 +27,7 @@ public class PostController {
 
     // 게시글 전체 조회
     // 200 : PostResponse
-    @GetMapping()
+    @GetMapping
     public List<PostResponse> findAllPosts() {
         return postService.findAll();
     }

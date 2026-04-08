@@ -18,24 +18,20 @@ public class PostService {
     private final PostRepository postRepository;
 
     public PostResponse save(PostRequest request) {
-        PostEntity entity = new PostEntity(request.getTitle(), request.getContent(), request.getAuthor());
-        PostEntity returnedEntity = postRepository.save(entity);
-        return PostResponse.fromEntity(returnedEntity);
+        PostEntity entity = new PostEntity(request.title(), request.content(), request.author());
+        return PostResponse.fromEntity(postRepository.save(entity));
     }
 
     public List<PostResponse> findAll() {
-        List<PostEntity> returnedEntity = postRepository.findAll();
-
-        List<PostResponse> responses = new ArrayList<>();
-        for (PostEntity entity : returnedEntity) {
-            responses.add(PostResponse.fromEntity(entity));
-        }
-        return responses;
+        return postRepository.findAll().stream()
+                .map(PostResponse::fromEntity)
+                .toList();
     }
 
     public PostResponse findById(Long id) {
         PostEntity returnedEntity = postRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("ID값에 맞는 게시물이 존재하지 않습니다!"));
+
         return PostResponse.fromEntity(returnedEntity);
     }
 

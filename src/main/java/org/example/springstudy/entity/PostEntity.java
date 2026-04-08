@@ -22,8 +22,8 @@ public class PostEntity {
     }
 
     public void modify(PostRequest request) {
-        this.title = request.getTitle();
-        this.content = request.getContent();
-        this.author = request.getAuthor();
+        this.title = request.title();
+        this.content = request.content();
+        this.author = request.author();
     }
 }
