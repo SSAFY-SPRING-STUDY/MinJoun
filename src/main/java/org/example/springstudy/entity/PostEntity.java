@@ -1,9 +1,7 @@
 package org.example.springstudy.entity;
 
-
 import lombok.Getter;
 import org.example.springstudy.controller.dto.PostRequest;
-import org.example.springstudy.controller.dto.PostResponse;
 
 @Getter
 public class PostEntity {

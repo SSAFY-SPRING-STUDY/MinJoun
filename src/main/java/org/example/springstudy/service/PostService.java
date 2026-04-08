@@ -5,10 +5,8 @@ import org.example.springstudy.controller.dto.PostRequest;
 import org.example.springstudy.controller.dto.PostResponse;
 import org.example.springstudy.entity.PostEntity;
 import org.example.springstudy.repository.PostRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,8 +16,7 @@ public class PostService {
     private final PostRepository postRepository;
 
     public PostResponse save(PostRequest request) {
-        PostEntity entity = new PostEntity(request.title(), request.content(), request.author());
-        return PostResponse.fromEntity(postRepository.save(entity));
+        return PostResponse.fromEntity(postRepository.save(PostRequest.toEntity(request)));
     }
 
     public List<PostResponse> findAll() {
