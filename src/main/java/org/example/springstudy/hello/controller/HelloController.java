@@ -1,6 +1,6 @@
-package org.example.springstudy.controller;
+package org.example.springstudy.hello.controller;
 
-import org.example.springstudy.service.HelloService;
+import org.example.springstudy.hello.service.HelloService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

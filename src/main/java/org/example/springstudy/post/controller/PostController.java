@@ -1,9 +1,9 @@
-package org.example.springstudy.controller;
+package org.example.springstudy.post.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.springstudy.controller.dto.PostRequest;
-import org.example.springstudy.controller.dto.PostResponse;
-import org.example.springstudy.service.PostService;
+import org.example.springstudy.post.controller.dto.PostRequest;
+import org.example.springstudy.post.controller.dto.PostResponse;
+import org.example.springstudy.post.service.PostService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
