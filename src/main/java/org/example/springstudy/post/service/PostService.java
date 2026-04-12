@@ -1,10 +1,10 @@
-package org.example.springstudy.service;
+package org.example.springstudy.post.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.springstudy.controller.dto.PostRequest;
-import org.example.springstudy.controller.dto.PostResponse;
-import org.example.springstudy.entity.PostEntity;
-import org.example.springstudy.repository.PostRepository;
+import org.example.springstudy.post.controller.dto.PostRequest;
+import org.example.springstudy.post.controller.dto.PostResponse;
+import org.example.springstudy.post.entity.PostEntity;
+import org.example.springstudy.post.repository.PostRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

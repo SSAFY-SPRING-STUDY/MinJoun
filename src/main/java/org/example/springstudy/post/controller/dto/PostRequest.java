@@ -1,6 +1,6 @@
-package org.example.springstudy.controller.dto;
+package org.example.springstudy.post.controller.dto;
 
-import org.example.springstudy.entity.PostEntity;
+import org.example.springstudy.post.entity.PostEntity;
 
 public record PostRequest(
         String title,

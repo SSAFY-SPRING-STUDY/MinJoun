@@ -1,7 +1,7 @@
-package org.example.springstudy.repository;
+package org.example.springstudy.post.repository;
 
-import org.example.springstudy.controller.dto.PostRequest;
-import org.example.springstudy.entity.PostEntity;
+import org.example.springstudy.post.controller.dto.PostRequest;
+import org.example.springstudy.post.entity.PostEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
