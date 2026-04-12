@@ -4,11 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.example.springstudy.auth.controller.dto.LoginRequest;
 import org.example.springstudy.auth.controller.dto.LoginResponse;
 import org.example.springstudy.auth.service.AuthService;
-import org.example.springstudy.auth.service.SessionManager;
+import org.example.springstudy.auth.component.SessionManager;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -23,7 +22,7 @@ public class AuthController {
             return ResponseEntity.ok(authService.login(request));
         }
         catch (Exception e) {
-            return ResponseEntity.status(401).build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
 
@@ -34,7 +33,7 @@ public class AuthController {
             authService.logout(token);
             return ResponseEntity.noContent().build();
         } catch (Exception e) {
-            return ResponseEntity.status(401).build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
 }

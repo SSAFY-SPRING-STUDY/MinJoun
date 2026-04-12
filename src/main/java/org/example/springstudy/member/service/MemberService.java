@@ -23,7 +23,7 @@ public class MemberService {
 
     public MemberResponse findById(Long id) {
         MemberEntity entity = memberRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "회원이 없음!"));
+                .orElseThrow(() -> new RuntimeException("회원이 없음!"));
         return MemberResponse.fromEntity(entity);
     }
 }

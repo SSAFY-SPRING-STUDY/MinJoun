@@ -1,14 +1,13 @@
 package org.example.springstudy.member.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.springstudy.auth.service.SessionManager;
+import org.example.springstudy.auth.component.SessionManager;
 import org.example.springstudy.member.controller.dto.MemberRequest;
 import org.example.springstudy.member.controller.dto.MemberResponse;
 import org.example.springstudy.member.service.MemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/api/members")
@@ -19,7 +18,7 @@ public class MemberController {
 
     @PostMapping
     public ResponseEntity<MemberResponse> join(@RequestBody MemberRequest request) {
-        return ResponseEntity.status(201).body(memberService.save(request));
+        return ResponseEntity.status(HttpStatus.CREATED).body(memberService.save(request));
     }
 
     @GetMapping("/me")
@@ -29,12 +28,12 @@ public class MemberController {
             Long memberId = sessionManager.getMemberId(token);
 
             if (memberId == null)
-                return ResponseEntity.status(401).build();
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             else
                 return ResponseEntity.ok(memberService.findById(memberId));
         }
         catch (Exception e) {
-            return ResponseEntity.status(401).build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
 }
