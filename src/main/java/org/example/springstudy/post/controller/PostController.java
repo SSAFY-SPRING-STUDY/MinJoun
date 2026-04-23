@@ -1,6 +1,8 @@
 package org.example.springstudy.post.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.springstudy.auth.component.SessionManager;
+import org.example.springstudy.common.response.ApiResponse;
 import org.example.springstudy.post.controller.dto.PostRequest;
 import org.example.springstudy.post.controller.dto.PostResponse;
 import org.example.springstudy.post.service.PostService;
@@ -16,47 +18,50 @@ import java.util.List;
 public class PostController {
 
     private final PostService postService;
+    private final SessionManager sessionManager;
 
     // 게시글 생성
     // 201 : PostResponse
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public ResponseEntity<PostResponse> createPost(@RequestBody PostRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(postService.save(request));
+    public ApiResponse<PostResponse> createPost(@RequestHeader("Authorization") String authHeader, @RequestBody PostRequest request) {
+        String token = sessionManager.getToken(authHeader);
+        Long memberId = sessionManager.getMemberId(token);
+        return ApiResponse.success(postService.save(request, memberId));
     }
 
     // 게시글 전체 조회
     // 200 : PostResponse
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public List<PostResponse> findAllPosts() {
-        return postService.findAll();
+    public ApiResponse<List<PostResponse>> findAllPosts() {
+        return ApiResponse.success(postService.findAll());
     }
 
     // id로 게시글 단건 조회
     // 200 : PostResponse
     // 404
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
-    public ResponseEntity<PostResponse> findPostById(@PathVariable Long id) {
-        try {
-            return ResponseEntity.ok(postService.findById(id));
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+    public ApiResponse<PostResponse> findPostById(@PathVariable Long id) {
+        return ApiResponse.success(postService.findById(id));
     }
 
     // id로 기존 게시물 수정
     // 200
-    // 404
+    @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{id}")
-    public void updatePost(@PathVariable Long id, @RequestBody PostRequest request) {
+    public ApiResponse<Void> updatePost(@PathVariable Long id, @RequestBody PostRequest request) {
         postService.update(id, request);
+        return ApiResponse.success();
     }
 
     // id로 게시물 삭제
     // 200
-    // 404
+    @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/{id}")
-    public void deletePost(@PathVariable Long id) {
+    public ApiResponse<Void> deletePost(@PathVariable Long id) {
         postService.delete(id);
+        return ApiResponse.success();
     }
 }

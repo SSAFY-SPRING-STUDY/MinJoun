@@ -6,14 +6,14 @@ public record PostResponse(
         long id,
         String title,
         String content,
-        String author
+        Long authorId
 ) {
     public static PostResponse fromEntity(PostEntity entity) {
         return new PostResponse(
                 entity.getId(),
                 entity.getTitle(),
                 entity.getContent(),
-                entity.getAuthor()
+                entity.getAuthorId()
         );
     }
 }

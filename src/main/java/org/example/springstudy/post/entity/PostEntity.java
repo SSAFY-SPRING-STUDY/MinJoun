@@ -7,21 +7,20 @@ import org.example.springstudy.post.controller.dto.PostRequest;
 public class PostEntity {
     private static Long AUTO_INCREMENT = 1L;
 
-    private Long id;
+    private final Long id;
     private String title;
     private String content;
-    private String author;
+    private final Long authorId;
 
-    public PostEntity(String title, String content, String author) {
+    public PostEntity(String title, String content, Long authorId) {
         this.id = AUTO_INCREMENT++;
         this.title = title;
         this.content = content;
-        this.author = author;
+        this.authorId = authorId;
     }
 
     public void modify(PostRequest request) {
         this.title = request.title();
         this.content = request.content();
-        this.author = request.author();
     }
 }

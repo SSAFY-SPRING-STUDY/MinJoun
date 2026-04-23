@@ -1,5 +1,7 @@
 package org.example.springstudy.auth.component;
 
+import org.example.springstudy.common.exception.CustomException;
+import org.example.springstudy.common.exception.ErrorCode;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -18,7 +20,11 @@ public class SessionManager {
     }
 
     public Long getMemberId(String token) {
-        return sessionStore.get(token);
+        Long memberId = sessionStore.get(token);
+        if (memberId == null)
+            throw new CustomException(ErrorCode.UNAUTHORIZED);
+
+        return memberId;
     }
 
     public void removeSession(String token) {
@@ -27,7 +33,7 @@ public class SessionManager {
 
     public String getToken(String authHeader) {
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            throw new RuntimeException("유효하지않은 AuthHeader 값 입니다.");
+            throw new CustomException(ErrorCode.UNAUTHORIZED);
         }
         return authHeader.substring(7);
     }
