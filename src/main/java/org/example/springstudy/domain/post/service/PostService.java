@@ -1,5 +1,6 @@
 package org.example.springstudy.domain.post.service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.example.springstudy.domain.member.entity.MemberEntity;
 import org.example.springstudy.domain.member.repository.MemberRepository;
@@ -41,6 +42,7 @@ public class PostService {
         return PostResponse.fromEntity(entity);
     }
 
+    @Transactional
     public PostResponse update(PostRequest request, Long postId, Long authorId) {
         MemberEntity author = memberRepository.findById(authorId)
                 .orElseThrow(() -> new CustomException(ErrorCode.MEMBER_NOT_FOUND));
@@ -52,7 +54,7 @@ public class PostService {
             throw new CustomException(ErrorCode.INVALID_PERMISSION);
         }
 
-        post.update(request.getTitle(), request.getContent());
+        post.update(request.title(), request.content());
 
         return PostResponse.fromEntity(post);
     }
