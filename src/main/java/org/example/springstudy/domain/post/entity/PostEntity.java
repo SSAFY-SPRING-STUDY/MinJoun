@@ -1,19 +1,27 @@
 package org.example.springstudy.domain.post.entity;
 
+import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.example.springstudy.domain.member.entity.MemberEntity;
 
 @Getter
+@Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PostEntity {
-    private static long AUTO_INCREMENT_ID = 1;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String title;
     private String content;
+
+    @ManyToOne
     private MemberEntity author;
 
     private PostEntity(String title, String content, MemberEntity author) {
-        this.id = AUTO_INCREMENT_ID++;
         this.title = title;
         this.content = content;
         this.author = author;
